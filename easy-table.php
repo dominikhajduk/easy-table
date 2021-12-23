@@ -1088,7 +1088,7 @@ col4,col5,col6
 <div class="clear"></div>
 
 <?php elseif($_GET['gettab'] == 'support') : ?>
-<p>To ask question, please visit this plugin support on WordPress.org</p>
+<p>Plugin not supported. Forked to github to provide PHP 8 support. See: <a href="https://github.com/dominikhajduk/easy-table/blob/main/README.md">README.md</a></p>
 <?php elseif ($_GET['gettab'] == 'about') : ?>
 <?php
 require_once(ABSPATH.'wp-admin/includes/plugin-install.php');
@@ -1207,7 +1207,7 @@ function easy_table_init() {
 * Use dedicated str_getcsv since 1.1
 */	
 if (!function_exists('easy_table_str_getcsv')) {
-	function easy_table_str_getcsv($input, $delimiter = ",", $enclosure = '"', $escape = '\\'){
+    function easy_table_str_getcsv($input, $delimiter = ",", $enclosure = '"', $escape = '\\') {
 		
 		/** 
 		* Bug fix, custom terminator wont work
@@ -1233,6 +1233,13 @@ if (!function_exists('easy_table_str_getcsv')) {
 		
 		$option = get_option('easy_table_plugin_option');
 		$limit  = !empty($option['limit']) ? (int)$option['limit'] : 2000000;
+
+        if (1 != mb_strlen($enclosure)) {
+            if ('&quot;' === $enclosure) {
+                $enclosure = '"';
+            }
+        }
+
 		while (($data = @fgetcsv( $handle, $limit, $delimiter, $enclosure )) !== FALSE) {
 			$num = count($data);
 			for ($c=0; $c < $num; $c++) {
