@@ -1,3 +1,8 @@
+![This repo is not maintained any longer](https://img.shields.io/maintenance/no/2026.svg)
+
+> [!CAUTION]
+> As of beginning 2026, the repository is no longer maintained.
+
 # easy-table
 
 This is copy of easy-table Wordpress plugin. Plugin was copied to provide 
